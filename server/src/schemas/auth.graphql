@@ -1,0 +1,11 @@
+type AuthResponse {
+  accessToken: String!
+  refreshToken: String!
+  user: User!
+}
+
+type Mutation {
+  register(email: String!, username: String!, password: String!): AuthResponse!
+  login(email: String! password: String!): AuthResponse!
+}
+
