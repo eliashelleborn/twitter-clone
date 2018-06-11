@@ -1,0 +1,10 @@
+Twitter Clone:
+  Client: 
+    ☐ Login/Register & protected routes
+    ☐ Basic feed functionality
+    ☐ User profiles
+  
+
+  Server:
+    ☐ Convert 'Post' to 'Tweet'
+    ☐ Follow users

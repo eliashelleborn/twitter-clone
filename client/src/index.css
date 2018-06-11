@@ -1,5 +1,39 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
-  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  background-color: #E6ECF0;
+  color: #14171a;
+}
+
+ul {
+  list-style: none;
   padding: 0;
-  font-family: sans-serif;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: bold;
+}
+  a:hover {
+    color: #1B95E0;
+    text-decoration: underline;
+  }
+
+.container {
+  width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+  position: relative;
+}
+
+.t-light {
+  color: #657786;
 }
