@@ -53,7 +53,11 @@ const Navbar = ({ user }) => (
 );
 
 Navbar.propTypes = {
-  user: PropTypes.shape.isRequired,
+  user: PropTypes.shape({}),
+};
+
+Navbar.defaultProps = {
+  user: null,
 };
 
 export default Navbar;
@@ -80,10 +84,11 @@ const Wrapper = styled.nav`
 
     li {
       display: inline-block;
+      height: 100%;
       & > a, & > button {
         height: 100%;
         display: flex;
-        padding: 14px;
+        padding: 0 14px;
         align-items: center;
         font-weight: bold;
         cursor: pointer;
@@ -93,9 +98,11 @@ const Wrapper = styled.nav`
         outline: 0;
         i {
           margin-right: 5px;
+          font-size: 1.4em;
         }
         &:hover {
           text-decoration: none;
+          color: #1B95E0;
           border-bottom: 2px solid #1B95E0;
         }
         &.active {

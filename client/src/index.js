@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { ApolloProvider } from 'react-apollo';
 
-import ProtectedRoute from './utils/ProtectedRoute';
 import './index.css';
+import client from './client';
+import ProtectedRoute from './utils/ProtectedRoute';
+
 
 // Containers
 import Home from './containers/Home';
@@ -17,26 +20,32 @@ import Navbar from './components/Navbar';
 const user = { username: 'EliasJohansson' };
 
 const App = () => (
-  <Router>
-    <React.Fragment>
+  <ApolloProvider client={client}>
+    <Router>
+      <React.Fragment>
 
-      <Navbar user={user} />
+        <Navbar user={user} />
 
-      <div className="container">
+        <div className="container">
 
-        {/* ROUTES */}
-        <ProtectedRoute path="/" exact component={Home} isAuthenticated={!!user} />
-        <ProtectedRoute path="/notifications" component={Notifications} isAuthenticated={!!user} />
+          {/* ROUTES */}
+          <ProtectedRoute path="/" exact component={Home} isAuthenticated={!!user} />
+          <ProtectedRoute
+            path="/notifications"
+            component={Notifications}
+            isAuthenticated={!!user}
+          />
 
-        {/* AUTH ROUTES */}
-        <Route path="/login" render={() => <Login isAuthenticated={!!user} />} />
-        <Route path="/register" render={() => <Register isAuthenticated={!!user} />} />
+          {/* AUTH ROUTES */}
+          <Route path="/login" render={() => <Login isAuthenticated={!!user} />} />
+          <Route path="/register" render={() => <Register isAuthenticated={!!user} />} />
 
-      </div>
+        </div>
 
 
-    </React.Fragment>
-  </Router>
+      </React.Fragment>
+    </Router>
+  </ApolloProvider>
 );
 
 ReactDOM.render(<App />, document.getElementById('root'));
