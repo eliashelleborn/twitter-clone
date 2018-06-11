@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -9,25 +10,25 @@ const Navbar = ({ user }) => (
 
       <ul className="nav-menu">
         <li>
-          <a href="http://localhost:3000" className="active">
+          <NavLink to="/" exact activeClassName="active">
             <i className="fas fa-home" />
             <span>Home</span>
-          </a>
+          </NavLink>
         </li>
 
         {user && /* IF LOGGED IN */
           <React.Fragment>
             <li>
-              <a href="http://localhost:3000">
+              <NavLink to="/notifications" activeClassName="active">
                 <i className="far fa-bell" />
                 <span>Notifications</span>
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="http://localhost:3000">
+              <button onClick={() => console.log('Open Messages Modal')}>
                 <i className="far fa-envelope" />
                 <span>Messages</span>
-              </a>
+              </button>
             </li>
           </React.Fragment>
         }
@@ -79,11 +80,17 @@ const Wrapper = styled.nav`
 
     li {
       display: inline-block;
-      a {
+      & > a, & > button {
         height: 100%;
         display: flex;
         padding: 14px;
         align-items: center;
+        font-weight: bold;
+        cursor: pointer;
+        background: none;
+        border: none;
+        color: inherit;
+        outline: 0;
         i {
           margin-right: 5px;
         }
