@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { ApolloProvider } from 'react-apollo';
-
-import './index.css';
 import client from './client';
+import './index.css';
 import ProtectedRoute from './utils/ProtectedRoute';
-
+import { GET_AUTHED_USER } from './graphql/queries/user';
 
 // Containers
 import Home from './containers/Home';
@@ -17,35 +16,54 @@ import Register from './containers/Register';
 // Components
 import Navbar from './components/Navbar';
 
-const user = { username: 'EliasJohansson' };
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: null,
+    };
+  }
+  componentDidMount() {
+    // Try getting user if refreshToken exists
+    const refreshToken = localStorage.getItem('refreshToken');
+    if (refreshToken) {
+      client.query({ query: GET_AUTHED_USER })
+        .then((res) => {
+          this.setState({ user: res.data.me });
+        });
+    }
+  }
 
-const App = () => (
-  <ApolloProvider client={client}>
-    <Router>
-      <React.Fragment>
+  render() {
+    return (
+      <ApolloProvider client={client}>
+        <Router>
+          <React.Fragment>
 
-        <Navbar user={user} />
+            <Navbar user={this.state.user} />
 
-        <div className="container">
+            <div className="container">
 
-          {/* ROUTES */}
-          <ProtectedRoute path="/" exact component={Home} isAuthenticated={!!user} />
-          <ProtectedRoute
-            path="/notifications"
-            component={Notifications}
-            isAuthenticated={!!user}
-          />
+              {/* ROUTES */}
+              <ProtectedRoute path="/" exact component={Home} isAuthenticated={!!this.state.user} />
+              <ProtectedRoute
+                path="/notifications"
+                component={Notifications}
+                isAuthenticated={!!this.state.user}
+              />
 
-          {/* AUTH ROUTES */}
-          <Route path="/login" render={() => <Login isAuthenticated={!!user} />} />
-          <Route path="/register" render={() => <Register isAuthenticated={!!user} />} />
+              {/* AUTH ROUTES */}
+              <Route path="/login" component={Login} />
+              <Route path="/register" component={Register} />
 
-        </div>
+            </div>
 
 
-      </React.Fragment>
-    </Router>
-  </ApolloProvider>
-);
+          </React.Fragment>
+        </Router>
+      </ApolloProvider>
+    );
+  }
+}
 
 ReactDOM.render(<App />, document.getElementById('root'));
