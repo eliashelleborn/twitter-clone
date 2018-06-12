@@ -4,6 +4,10 @@ type AuthResponse {
   user: User!
 }
 
+type Query {
+  me: User!
+}
+
 type Mutation {
   register(email: String!, username: String!, password: String!): AuthResponse!
   login(email: String! password: String!): AuthResponse!

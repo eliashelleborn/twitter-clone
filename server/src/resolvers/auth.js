@@ -1,5 +1,5 @@
 import { ACCESS_SECRET, REFRESH_SECRET } from '../utils/dotenv';
-import { isNotAuthenticated } from '../utils/permissions';
+import { isNotAuthenticated, isAuthenticated } from '../utils/permissions';
 import { createTokens } from '../utils/auth';
 
 
@@ -56,7 +56,13 @@ const login = isNotAuthenticated.createResolver(async (parent, args, { models })
   };
 });
 
+const me = isAuthenticated.createResolver(async (parent, args, { user, models }) => models.User.findOne({ _id: user }));
+
+
 export default {
+  Query: {
+    me,
+  },
   Mutation: {
     register,
     login,
