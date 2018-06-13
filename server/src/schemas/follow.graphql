@@ -1,0 +1,21 @@
+type Follow {
+  _id: ID!
+  followee: String!
+  follower: String!
+  start: String!
+  end: String
+}
+
+type FollowResponse {
+  follow: Follow!
+  action: String!
+}
+
+type Query {
+  getFollowers(userId: String!): [User]
+  getFollowing(userId: String!): [User]
+}
+
+type Mutation {
+  toggleFollow(userId: String!): FollowResponse!
+}
