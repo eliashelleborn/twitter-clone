@@ -10,10 +10,6 @@ export const GET_AUTHED_USER = gql`
   }
 `;
 
-export const GET_USER = gql`
+export const GET_USER = '';
 
-`;
-
-export const GET_USERS = gql`
-  
-`;
+export const GET_USERS = '';

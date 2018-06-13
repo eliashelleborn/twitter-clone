@@ -21,6 +21,7 @@ class App extends Component {
     super(props);
     this.state = {
       user: null,
+      tokenExists: !!localStorage.getItem('refreshToken'),
     };
   }
   componentDidMount() {
@@ -35,6 +36,7 @@ class App extends Component {
   }
 
   render() {
+    const { tokenExists } = this.state;
     return (
       <ApolloProvider client={client}>
         <Router>
@@ -45,11 +47,11 @@ class App extends Component {
             <div className="container">
 
               {/* ROUTES */}
-              <ProtectedRoute path="/" exact component={Home} isAuthenticated={!!this.state.user} />
+              <ProtectedRoute path="/" exact component={Home} isAuthenticated={tokenExists} />
               <ProtectedRoute
                 path="/notifications"
                 component={Notifications}
-                isAuthenticated={!!this.state.user}
+                isAuthenticated={tokenExists}
               />
 
               {/* AUTH ROUTES */}
