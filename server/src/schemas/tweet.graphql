@@ -1,17 +1,17 @@
 type Tweet {
   _id: ID!
   text: String!
-  user: String!
-  entities: TweetEntities
+  user: User!
+  entities: TweetEntities!
   stats: TweetStats!
   createdAt: String!
   updatedAt: String!
 }
 
 type TweetEntities {
-  hashtags: [String],
-  urls: [String],
-  userMentions: [String],
+  hashtags: [String]!
+  urls: [String]!
+  userMentions: [String]!
 }
 
 type TweetStats {
@@ -21,13 +21,10 @@ type TweetStats {
 }
 
 type Query {
-  getTweets: [Tweet!]
-  getTweetById(_id: ID!): Tweet!
+  getHomeFeed: [Tweet]
 }
 
 type Mutation {
   createTweet(text: String!): Tweet!
-  updateTweet(_id: ID!, text: String!): Tweet!
-  deleteTweet(_id: ID!): Tweet!
 }
 

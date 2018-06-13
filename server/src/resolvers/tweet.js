@@ -4,10 +4,14 @@ import { isAuthenticated } from '../utils/permissions';
 const authRequired = isAuthenticated.createResolver;
 
 // Queries
-
+const getHomeFeed = authRequired(async (parent, args, { models: { Tweet, Follow }, user }) => {
+  let usersFollowed = await Follow.find({ follower: user });
+  usersFollowed = usersFollowed.map(x => x.followee);
+  return Tweet.find({ user: { $in: usersFollowed } }).populate('user').sort({ createdAt: -1 }).limit(25);
+});
 
 // Mutations
-const createTweet = authRequired((parent, args, { models: { Tweet }, user }) => {
+const createTweet = authRequired(async (parent, args, { models: { Tweet }, user }) => {
   const hashtags = args.text.match(/#[a-z0-9_]+/g).map(x => x.substr(1));
   const userMentions = args.text.match(/\B@[a-z0-9_-]+/gi).map(x => x.substr(1));
   const urls = args.text.match(/\bhttps?:\/\/\S+/gi);
@@ -21,7 +25,12 @@ const createTweet = authRequired((parent, args, { models: { Tweet }, user }) => 
     },
     user,
   });
-  return newTweet.save();
+  try {
+    const savedTweet = await newTweet.save();
+    return Tweet.populate(savedTweet, 'user');
+  } catch (err) {
+    return err;
+  }
 });
 /*
 const deleteTweet = authRequired(async (parent, args, { models: { Tweet }, user }) => {
@@ -37,7 +46,7 @@ const deleteTweet = authRequired(async (parent, args, { models: { Tweet }, user 
 */
 export default {
   Query: {
-
+    getHomeFeed,
   },
   Mutation: {
     createTweet,
