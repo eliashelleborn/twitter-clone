@@ -2,9 +2,25 @@ type User {
   _id: ID!
   email: String!
   username: String!
+  screenName: String!
   password: String!
-  createdAt: String!
-  updatedAt: String!
+
+  profileBanner: String
+  profileImage: String
+  description: String
+  location: String
+
+  verified: Boolean!
+  private: Boolean!
+
+  stats: UserStats!
+}
+
+type UserStats {
+  followersCount: Int!
+  followingCount: Int!
+  tweetsCount: Int!
+  favoritesCount: Int!
 }
 
 type Query {
@@ -13,6 +29,13 @@ type Query {
 }
 
 type Mutation {
-  updateUser(username: String): User!
+  updateUser(
+    username: String,
+    screenName: String,
+    profileBanner: String,
+    profileImage: String,
+    description: String,
+    location: String,
+  ): User!
   deleteUser: User!
 }

@@ -9,9 +9,7 @@ const getUserById = authRequired((parent, args, { models }) => models.User.findO
 // Mutations
 const updateUser = authRequired(async (parent, args, { models, user }) => {
   const userToUpdate = await models.User.findOne({ _id: user });
-  userToUpdate.set({
-    username: args.username,
-  });
+  userToUpdate.set(args);
   return userToUpdate.save();
 });
 const deleteUser = authRequired(async (parent, args, { models, user }) => {

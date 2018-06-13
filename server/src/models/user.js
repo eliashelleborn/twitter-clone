@@ -14,7 +14,12 @@ const userSchema = new Schema({
   username: {
     type: String,
     required: true,
-    maxlength: 128,
+    maxlength: 20,
+  },
+  screenName: {
+    type: String,
+    required: true,
+    maxlength: 50,
   },
   password: {
     type: String,
@@ -22,6 +27,39 @@ const userSchema = new Schema({
     minlength: 6,
     maxlength: 128,
     select: false,
+  },
+
+  profileBanner: String,
+  profileImage: String,
+  description: String,
+  location: String,
+
+  verified: {
+    type: Boolean,
+    default: false,
+  },
+  private: {
+    type: Boolean,
+    default: false,
+  },
+
+  stats: {
+    followersCount: {
+      type: Number,
+      default: 0,
+    },
+    followingCount: {
+      type: Number,
+      default: 0,
+    },
+    tweetsCount: {
+      type: Number,
+      default: 0,
+    },
+    favoritesCount: {
+      type: Number,
+      default: 0,
+    },
   },
 }, {
   timestamps: true,

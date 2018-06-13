@@ -1,7 +1,6 @@
 type AuthResponse {
   accessToken: String!
   refreshToken: String!
-  user: User!
 }
 
 type Query {
@@ -9,7 +8,12 @@ type Query {
 }
 
 type Mutation {
-  register(email: String!, username: String!, password: String!): AuthResponse!
+  register(
+    email: String!, 
+    username: String!, 
+    screenName: String!
+    password: String!
+  ): AuthResponse!
   login(email: String! password: String!): AuthResponse!
 }
 
