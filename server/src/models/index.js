@@ -1,9 +1,9 @@
 import User from './User';
-import Post from './Post';
+import Tweet from './Tweet';
 
 const models = {
   User,
-  Post,
+  Tweet,
 };
 
 export default models;

@@ -1,0 +1,33 @@
+type Tweet {
+  _id: ID!
+  text: String!
+  user: String!
+  entities: TweetEntities
+  stats: TweetStats!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type TweetEntities {
+  hashtags: [String],
+  url: [String],
+  userMentions: [String],
+}
+
+type TweetStats {
+  favoriteCount: Int!
+  retweetCount: Int!
+  replyCount: Int!
+}
+
+type Query {
+  getTweets: [Tweet!]
+  getTweetById(_id: ID!): Tweet!
+}
+
+type Mutation {
+  createTweet(text: String!): Tweet!
+  updateTweet(_id: ID!, text: String!): Tweet!
+  deleteTweet(_id: ID!): Tweet!
+}
+
