@@ -1,52 +1,45 @@
 import { isAuthenticated } from '../utils/permissions';
-import { UnauthorizedError, NotFoundError } from '../utils/errors';
+// import { UnauthorizedError, NotFoundError } from '../utils/errors';
 
 const authRequired = isAuthenticated.createResolver;
 
 // Queries
-const getTweets = authRequired((parent, args, { models }) => models.Tweet.find());
-const getTweetById = authRequired((parent, args, { models }) => models.Tweet.findOne(args));
+
 
 // Mutations
-const createTweet = authRequired((parent, args, { models, user }) => {
-  const Tweet = new models.Tweet({
+const createTweet = authRequired((parent, args, { models: { Tweet }, user }) => {
+  const hashtags = args.text.match(/#[a-z0-9_]+/g).map(x => x.substr(1));
+  const userMentions = args.text.match(/\B@[a-z0-9_-]+/gi).map(x => x.substr(1));
+  const urls = args.text.match(/\bhttps?:\/\/\S+/gi);
+
+  const newTweet = new Tweet({
     text: args.text,
-    author: user,
+    entities: {
+      hashtags,
+      urls,
+      userMentions,
+    },
+    user,
   });
-  return Tweet.save();
+  return newTweet.save();
 });
-
-const updateTweet = authRequired(async (parent, args, { models, user }) => {
-  const Tweet = await models.Tweet.findOne({ _id: args._id });
-  if (!Tweet) {
+/*
+const deleteTweet = authRequired(async (parent, args, { models: { Tweet }, user }) => {
+  const tweetToDelete = await Tweet.findOne({ _id: args._id });
+  if (!tweetToDelete) {
     return new NotFoundError();
   }
-  if (Tweet.author.toString() === user) {
-    Tweet.set({ text: args.text });
-    return Tweet.save();
+  if (tweetToDelete.author.toString() === user) {
+    return tweetToDelete.remove();
   }
   return new UnauthorizedError();
 });
-
-const deleteTweet = authRequired(async (parent, args, { models, user }) => {
-  const Tweet = await models.Tweet.findOne({ _id: args._id });
-  if (!Tweet) {
-    return new NotFoundError();
-  }
-  if (Tweet.author.toString() === user) {
-    return Tweet.remove();
-  }
-  return new UnauthorizedError();
-});
-
+*/
 export default {
   Query: {
-    getTweets,
-    getTweetById,
+
   },
   Mutation: {
     createTweet,
-    updateTweet,
-    deleteTweet,
   },
 };

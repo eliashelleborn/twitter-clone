@@ -10,7 +10,7 @@ type Tweet {
 
 type TweetEntities {
   hashtags: [String],
-  url: [String],
+  urls: [String],
   userMentions: [String],
 }
 

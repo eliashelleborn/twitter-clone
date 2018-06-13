@@ -16,7 +16,7 @@ const tweetSchema = new Schema({
 
   entities: {
     hashtags: Array,
-    url: Array,
+    urls: Array,
     userMentions: Array,
   },
 
