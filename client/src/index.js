@@ -27,10 +27,17 @@ class App extends Component {
   componentDidMount() {
     // Try getting user if refreshToken exists
     const refreshToken = localStorage.getItem('refreshToken');
+    const accessToken = localStorage.getItem('accessToken');
     if (refreshToken) {
       client.query({ query: GET_AUTHED_USER })
         .then((res) => {
           this.setState({ user: res.data.me });
+        })
+        // If no user is returned, remove all tokens (logout)
+        .catch((err) => {
+          console.log(err);
+          localStorage.removeItem('refreshToken');
+          if (accessToken) localStorage.removeItem('accessToken');
         });
     }
   }

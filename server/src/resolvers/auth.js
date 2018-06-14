@@ -52,9 +52,7 @@ const login = isNotAuthenticated.createResolver(async (parent, args, { models: {
   };
 });
 
-const me = isAuthenticated.createResolver((parent, args, { user, models: { User } }) => {
-  User.findOne({ _id: user });
-});
+const me = isAuthenticated.createResolver((parent, args, { user, models: { User } }) => User.findOne({ _id: user }));
 
 
 export default {
