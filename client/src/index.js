@@ -14,7 +14,8 @@ import Login from './containers/Login';
 import Register from './containers/Register';
 
 // Components
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar/';
+import { PageContainer } from './components/shared/Containers';
 
 class App extends Component {
   constructor(props) {
@@ -51,7 +52,7 @@ class App extends Component {
 
             <Navbar user={this.state.user} />
 
-            <div className="container">
+            <PageContainer>
 
               {/* ROUTES */}
               <ProtectedRoute path="/" exact component={Home} isAuthenticated={tokenExists} />
@@ -65,7 +66,7 @@ class App extends Component {
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
 
-            </div>
+            </PageContainer>
 
 
           </React.Fragment>

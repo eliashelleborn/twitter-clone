@@ -6,6 +6,7 @@ export const GET_AUTHED_USER = gql`
       _id
       email
       username
+      screenName
     }
   }
 `;

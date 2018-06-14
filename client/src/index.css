@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   min-height: 100vh;
   background-color: #E6ECF0;
   color: #14171a;
@@ -26,14 +26,3 @@ a {
     color: #1B95E0;
     text-decoration: underline;
   }
-
-.container {
-  width: 1200px;
-  margin: 0 auto;
-  height: 100%;
-  position: relative;
-}
-
-.t-light {
-  color: #657786;
-}
