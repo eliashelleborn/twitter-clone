@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import Module from '../Module';
 
-const ProfileModule = () => (
+const ProfileModule = ({ user }) => (
   <Wrapper>
 
     <Banner />
@@ -12,28 +13,40 @@ const ProfileModule = () => (
         <img src="https://source.unsplash.com/random/100x100" alt="" />
       </div>
       <div className="user__names">
-        <span>Screen Name</span>
-        <span>@username</span>
+        <span>{user.username}</span>
+        <span>@{user.screenName}</span>
       </div>
     </UserInfo>
 
     <Stats>
       <div>
         <span>Tweets</span>
-        <span>1,510</span>
+        <span>{user.stats.tweetsCount}</span>
       </div>
       <div>
         <span>Following</span>
-        <span>519</span>
+        <span>{user.stats.followingCount}</span>
       </div>
       <div>
         <span>Followers</span>
-        <span>3,210</span>
+        <span>{user.stats.followersCount}</span>
       </div>
     </Stats>
 
   </Wrapper>
 );
+
+ProfileModule.propTypes = {
+  user: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+    screenName: PropTypes.string.isRequired,
+    stats: PropTypes.shape({
+      tweetsCount: PropTypes.number.isRequired,
+      followersCount: PropTypes.number.isRequired,
+      followingCount: PropTypes.number.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
 
 const Wrapper = Module.extend`
   padding: 0;

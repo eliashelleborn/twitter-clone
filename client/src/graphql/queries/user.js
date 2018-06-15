@@ -7,6 +7,11 @@ export const GET_AUTHED_USER = gql`
       email
       username
       screenName
+      stats {
+        tweetsCount
+        followersCount
+        followingCount
+      }
     }
   }
 `;

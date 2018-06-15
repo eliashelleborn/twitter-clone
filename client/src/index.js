@@ -22,7 +22,7 @@ class App extends Component {
     super(props);
     this.state = {
       user: null,
-      tokenExists: !!localStorage.getItem('refreshToken'),
+      tokenExists: !!localStorage.getItem('refreshToken'), // Optimistic auth check
     };
   }
   componentDidMount() {
@@ -55,14 +55,19 @@ class App extends Component {
             <PageContainer>
 
               {/* ROUTES */}
-              <ProtectedRoute path="/" exact component={Home} isAuthenticated={tokenExists} />
+              <ProtectedRoute
+                exact
+                path="/"
+                component={Home}
+                isAuthenticated={tokenExists}
+              />
               <ProtectedRoute
                 path="/notifications"
                 component={Notifications}
                 isAuthenticated={tokenExists}
               />
 
-              {/* AUTH ROUTES */}
+
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
 
