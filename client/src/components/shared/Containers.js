@@ -5,6 +5,14 @@ export const Container = styled.div`
   margin: 0 auto;
   height: 100%;
   position: relative;
+
+  @media screen and (max-width: 1190px) {
+    width: 890px;
+  }
+  @media screen and (max-width: 900px) {
+    width: 100%;
+    padding: 0 10px 0 10px;
+  }
 `;
 
 export const PageContainer = styled.div`
@@ -13,4 +21,12 @@ export const PageContainer = styled.div`
   padding-top: 56px;
   min-height: 150vh;
   position: relative;
+
+  @media screen and (max-width: 1190px) {
+    width: 890px;
+  }
+  @media screen and (max-width: 900px) {
+    width: 100%;
+    padding: 56px 10px 0 10px;
+  }
 `;
