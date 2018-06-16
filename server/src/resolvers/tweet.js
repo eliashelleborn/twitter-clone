@@ -7,7 +7,7 @@ const authRequired = isAuthenticated.createResolver;
 const getHomeFeed = authRequired(async (parent, args, { models: { Tweet, Follow }, user }) => {
   let usersFollowed = await Follow.find({ follower: user });
   usersFollowed = usersFollowed.map(x => x.followee);
-  return Tweet.find({ user: { $in: usersFollowed } }).populate('user').sort({ createdAt: -1 }).limit(25);
+  return Tweet.find({ user: { $in: [...usersFollowed, user] } }).populate('user').sort({ createdAt: -1 }).limit(25);
 });
 
 // Mutations
