@@ -8,10 +8,10 @@ import ProtectedRoute from './utils/ProtectedRoute';
 import { GET_AUTHED_USER } from './graphql/queries/user';
 
 // Containers
-import Home from './containers/Home';
-import Notifications from './containers/Notifications';
-import Login from './containers/Login';
-import Register from './containers/Register';
+import Home from './containers/pages/Home';
+import Notifications from './containers/pages/Notifications';
+import Login from './containers/pages/Login';
+import Register from './containers/pages/Register';
 
 // Components
 import Navbar from './components/Navbar/';

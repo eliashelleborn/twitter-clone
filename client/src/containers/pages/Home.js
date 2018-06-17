@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
-import { GET_AUTHED_USER } from '../graphql/queries/user';
-import Sidebar from '../components/Sidebar';
-import ProfileModule from '../components/Sidebar/modules/Profile';
-import TrendingModule from '../components/Sidebar/modules/Trending';
+import { GET_AUTHED_USER } from '../../graphql/queries/user';
+import { GET_HOME_FEED } from '../../graphql/queries/feed';
+import Sidebar from '../../components/Sidebar';
+import ProfileModule from '../../components/Sidebar/modules/Profile';
+import TrendingModule from '../../components/Sidebar/modules/Trending';
+import Feed from '../shared/Feed';
 
 class Home extends Component {
   constructor(props) {
@@ -16,28 +18,28 @@ class Home extends Component {
   render() {
     return (
       <HomeLayout>
+        {/* LEFT SIDEBAR - Profile & Trending Modules */}
         <Sidebar>
-          {/* User module */}
           <Query query={GET_AUTHED_USER}>
-            {({ loading, error, data }) => {
-              if (loading) return 'Loading...';
-              if (error) return 'Error!';
-              const { me: user } = data;
-              return (
-                <ProfileModule user={user} />
-              );
+            {({ data: { me: user } }) => {
+              if (user) {
+                return (
+                  <ProfileModule user={user} />
+                );
+              }
+              return null;
             }}
           </Query>
 
-          {/* Trending module */}
           <TrendingModule />
 
         </Sidebar>
 
+        {/* MAIN CONTENT - Compose & Home Feed */}
         <main>
           <div className="compose-tweet" />
           <div className="see-new-tweets" />
-          <section />
+          <Feed query={GET_HOME_FEED} />
         </main>
 
         {/* RIGHT SIDEBAR */}
@@ -50,18 +52,6 @@ class Home extends Component {
   }
 }
 
-Home.propTypes = {
-  user: PropTypes.shape({
-    username: PropTypes.string.isRequired,
-    screenName: PropTypes.string.isRequired,
-    stats: PropTypes.shape({
-      tweetsCount: PropTypes.number.isRequired,
-      followersCount: PropTypes.number.isRequired,
-      followingCount: PropTypes.number.isRequired,
-    }).isRequired,
-  }).isRequired,
-};
-
 const HomeLayout = styled.div`
   display: flex;
   main {
@@ -69,10 +59,6 @@ const HomeLayout = styled.div`
     margin: 0 10px;
     @media screen and (max-width: 1190px) {
       margin: 0 0 0 10px;
-    }
-    section {
-      height: 150vh;
-      background-color: white;
     }
     .compose-tweet {
       height: 58px;
