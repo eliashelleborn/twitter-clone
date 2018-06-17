@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Query } from 'react-apollo';
+import Tweet from './Tweet/';
 
 class Feed extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class Feed extends Component {
         <Query query={this.props.query}>
           {({ data: { getHomeFeed: tweets } }) => {
             if (tweets) {
-              return tweets.map(tweet => <div>{tweet.text}</div>);
+              return tweets.map(tweet => <Tweet data={tweet} />);
             }
             return null;
           }}

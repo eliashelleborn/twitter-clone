@@ -9,9 +9,9 @@ type Tweet {
 }
 
 type TweetEntities {
-  hashtags: [String]!
-  urls: [String]!
-  userMentions: [String]!
+  hashtags: [String]
+  urls: [String]
+  userMentions: [String]
 }
 
 type TweetStats {

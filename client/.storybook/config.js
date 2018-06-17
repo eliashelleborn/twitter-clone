@@ -1,7 +1,13 @@
-import { configure } from '@storybook/react';
+import { configure, addDecorator } from '@storybook/react';
+import { BrowserRouter } from 'react-router-dom';
+import React from 'react';
+
+const req = require.context('../src', true, /\.stories\.js$/)
 
 function loadStories() {
-  require('../src/stories');
+  req.keys().forEach((filename) => req(filename))
 }
+
+addDecorator(story => <BrowserRouter>{story()}</BrowserRouter>);
 
 configure(loadStories, module);
