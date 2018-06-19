@@ -25,8 +25,8 @@ import { PageContainer } from './components/shared/Containers';
 const App = () => (
   <ApolloProvider client={client}>
     <Router>
-      <Query query={GET_AUTHED_USER} >
-        {({ data: { me: authenticatedUser } }) => (
+      <Query query={GET_AUTHED_USER}>
+        {({ data: { me: authenticatedUser } = {} }) => (
           <React.Fragment>
             <Navbar user={authenticatedUser} />
 

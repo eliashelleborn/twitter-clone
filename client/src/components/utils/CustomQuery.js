@@ -15,7 +15,7 @@ const CustomQuery = ({ loadingRender, ...props }) => (
 
 CustomQuery.propTypes = {
   loadingRender: PropTypes.node,
-  children: PropTypes.node,
+  children: PropTypes.func,
 };
 
 CustomQuery.defaultProps = {
