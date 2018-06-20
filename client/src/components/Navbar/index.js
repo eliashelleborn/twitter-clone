@@ -25,7 +25,6 @@ class Navbar extends Component {
       dropdownActive: !this.state.dropdownActive,
     });
   }
-
   render() {
     return (
       <StyledNavbar>

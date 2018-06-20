@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
+/* import PropTypes from 'prop-types'; */
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { ApolloProvider } from 'react-apollo';
-import client from './client';
+import client from './graphql/client';
 import './index.css';
 
 // Queries
-import { GET_AUTHED_USER } from './graphql/queries/user';
+import { GET_AUTHED_USER, UPDATE_AUTHED_USER } from './graphql/state/authUser';
+import { AUTHENTICATE_WITH_TOKEN } from './graphql/mutations/auth';
 
 // Containers
 import Home from './containers/pages/Home';
@@ -22,38 +23,71 @@ import Navbar from './components/Navbar/';
 import { PageContainer } from './components/shared/Containers';
 
 
-const App = () => (
-  <ApolloProvider client={client}>
-    <Router>
-      <Query query={GET_AUTHED_USER}>
-        {({ data: { me: authenticatedUser } = {} }) => (
-          <React.Fragment>
-            <Navbar user={authenticatedUser} />
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      authIsLoading: true,
+    };
+  }
+  componentDidMount = () => {
+    const refreshToken = localStorage.getItem('refreshToken');
+    if (refreshToken) this.tryTokenAuthenticate();
+    else this.setState({ authIsLoading: false });
+  }
+  tryTokenAuthenticate = () => {
+    client.query({
+      query: AUTHENTICATE_WITH_TOKEN,
+      fetchPolicy: 'network-only',
+    }).then(({ data }) => {
+      client.mutate({
+        mutation: UPDATE_AUTHED_USER,
+        variables: { user: data.me },
+      });
+      this.setState({ authIsLoading: false });
+    }).catch((err) => {
+      this.setState({ authIsLoading: false });
+    });
+  }
+  render() {
+    return (
+      <ApolloProvider client={client}>
+        <Router>
 
-            {/* ===== ROUTES ===== */}
-            <PageContainer>
-              <ProtectedRoute
-                exact
-                path="/"
-                component={Home}
-                isAuthenticated={!!authenticatedUser}
-              />
-              <ProtectedRoute
-                path="/notifications"
-                component={Notifications}
-                isAuthenticated={!!authenticatedUser}
-              />
+          {!this.state.authIsLoading &&
+            <Query query={GET_AUTHED_USER}>
+              {({ data: { authedUser } }) => (
+                <React.Fragment>
+                  <Navbar user={authedUser} />
 
-              <Route path="/login" render={() => <Login isAuthenticated={!!authenticatedUser} />} />
-              <Route path="/register" component={Register} />
-            </PageContainer>
+                  {/* ===== ROUTES ===== */}
+                  <PageContainer>
+                    <ProtectedRoute
+                      exact
+                      path="/"
+                      component={Home}
+                      isAuthenticated={!!authedUser}
+                    />
+                    <ProtectedRoute
+                      path="/notifications"
+                      component={Notifications}
+                      isAuthenticated={!!authedUser}
+                    />
+
+                    <Route path="/login" render={() => <Login isAuthenticated={!!authedUser} />} />
+                    <Route path="/register" component={Register} />
+                  </PageContainer>
 
 
-          </React.Fragment>
-        )}
-      </Query>
-    </Router>
-  </ApolloProvider>
-);
+                </React.Fragment>
+              )}
+            </Query>
+          }
+
+        </Router>
+      </ApolloProvider>
+    );
+  }
+}
 
 ReactDOM.render(<App />, document.getElementById('root'));

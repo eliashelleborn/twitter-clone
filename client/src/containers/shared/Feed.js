@@ -15,7 +15,7 @@ class Feed extends Component {
         <Query query={this.props.query}>
           {({ data: { getHomeFeed: tweets } }) => {
             if (tweets) {
-              return tweets.map(tweet => <Tweet data={tweet} />);
+              return tweets.map(tweet => <Tweet key={tweet._id} data={tweet} />);
             }
             return null;
           }}

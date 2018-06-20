@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { ApolloConsumer } from 'react-apollo';
 
 const Dropdown = ({ user }) => (
   <Wrapper>
@@ -65,7 +66,19 @@ const Dropdown = ({ user }) => (
       <li className="item"><a href="http://localhost:3000">Settings and privacy</a></li>
       <li className="item"><a href="http://localhost:3000">Help Center</a></li>
       <li className="item"><a href="http://localhost:3000">Keyboard shortcuts</a></li>
-      <li className="item"><a href="http://localhost:3000">Log out</a></li>
+      <ApolloConsumer>
+        {client => (
+          <li className="item">
+            <button onClick={() => {
+              client.resetStore();
+              localStorage.removeItem('refreshToken');
+              localStorage.removeItem('accessToken');
+            }}
+            >Log out
+            </button>
+          </li>
+        )}
+      </ApolloConsumer>
       <li className="divider" />
       <li className="item"><a href="http://localhost:3000">Night mode</a></li>
     </ul>
@@ -121,16 +134,21 @@ const Wrapper = styled.div`
     }
     .item {
       font-size: 14px;
-      a {
+      a, button {
         padding: 8px 18px;
+        width: 100%;
         height: 100%;
         display: block;
         color: inherit;
         font-weight: normal;
+        border: none;
+        background-color: none;
+        text-align: left;
         &:hover {
           text-decoration: none;
           background: #1B95E0;
           color: white;
+          cursor: pointer;
           i {
             color: white !important;
           }

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+/* import PropTypes from 'prop-types'; */
 import { Query } from 'react-apollo';
-import { GET_AUTHED_USER } from '../../graphql/queries/user';
+import { GET_AUTHED_USER } from '../../graphql/state/authUser';
 import { GET_HOME_FEED } from '../../graphql/queries/feed';
 import Sidebar from '../../components/Sidebar';
 import ProfileModule from '../../components/Sidebar/modules/Profile';
@@ -20,11 +20,12 @@ class Home extends Component {
       <HomeLayout>
         {/* LEFT SIDEBAR - Profile & Trending Modules */}
         <Sidebar>
+
           <Query query={GET_AUTHED_USER}>
-            {({ data: { me: user } }) => {
-              if (user) {
+            {({ data: { authedUser } }) => {
+              if (authedUser) {
                 return (
-                  <ProfileModule user={user} />
+                  <ProfileModule user={authedUser} />
                 );
               }
               return null;

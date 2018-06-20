@@ -22,6 +22,7 @@ const register = isNotAuthenticated.createResolver(async (parent, args, { models
   return {
     accessToken,
     refreshToken,
+    user,
   };
 });
 
@@ -49,6 +50,7 @@ const login = isNotAuthenticated.createResolver(async (parent, args, { models: {
   return {
     accessToken,
     refreshToken,
+    user,
   };
 });
 

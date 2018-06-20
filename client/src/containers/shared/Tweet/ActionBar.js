@@ -42,12 +42,12 @@ ActionBar.propTypes = {
     retweetCount: PropTypes.number,
     favoriteCount: PropTypes.number,
   }).isRequired,
-  actions: PropTypes.shape({
+  /* actions: PropTypes.shape({
     reply: PropTypes.func.isRequired,
     retweet: PropTypes.func.isRequired,
     favorite: PropTypes.func.isRequired,
     message: PropTypes.func.isRequired,
-  }).isRequired,
+  }).isRequired, */
 };
 
 
