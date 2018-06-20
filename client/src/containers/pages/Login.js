@@ -7,7 +7,7 @@ import { LOGIN } from '../../graphql/mutations/auth';
 import { UPDATE_AUTHED_USER } from '../../graphql/state/authUser';
 
 // Components
-import { Form, Input, Label, Description, Group } from '../../components/shared/Form';
+import { Form, Input, Group } from '../../components/shared/Form';
 import { Button } from '../../components/shared/Button';
 
 class Login extends Component {

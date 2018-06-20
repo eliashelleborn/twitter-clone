@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Module from '../Module';
 
@@ -10,11 +11,17 @@ const ProfileModule = ({ user }) => (
 
     <UserInfo>
       <div>
-        <img src="https://source.unsplash.com/random/100x100" alt="" />
+        <NavLink to={user.username}>
+          <img src="https://source.unsplash.com/random/100x100" alt="" />
+        </NavLink>
       </div>
       <div className="user__names">
-        <span>{user.username}</span>
-        <span>@{user.screenName}</span>
+        <NavLink to={user.username}>
+          <span>{user.username}</span>
+        </NavLink>
+        <NavLink to={user.username}>
+          @<span>{user.screenName}</span>
+        </NavLink>
       </div>
     </UserInfo>
 
@@ -78,16 +85,30 @@ const UserInfo = styled.div`
   div:last-child {
     padding-left: 10px;
     padding-top: 10px;
-    span:first-child {
-      font-size: 18px;
-      font-weight: bold;
-      line-height: 25px;
-      display: block;
+    a:first-child { 
+      span {
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 25px;
+        display: block;
+      }
+      &:hover {
+        color: #14171a;
+      }
     }
-    span:last-child {
-      line-height: 20px;
-      font-size: 14px;
-      color: #66757f;
+    a:last-child {
+      &, span {
+        line-height: 20px;
+        font-size: 14px;
+        font-weight: normal;
+        color: #66757f;
+      }
+      &:hover {
+        text-decoration: none;
+        span {
+          text-decoration: underline;
+        }
+      }
     }
   }
 `;
