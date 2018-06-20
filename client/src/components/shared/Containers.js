@@ -19,7 +19,6 @@ export const PageContainer = styled.div`
   width: 1190px;
   margin: 0 auto;
   padding-top: 56px;
-  min-height: 150vh;
   position: relative;
 
   @media screen and (max-width: 1190px) {

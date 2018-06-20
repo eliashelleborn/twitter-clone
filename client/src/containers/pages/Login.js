@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { ApolloConsumer } from 'react-apollo';
 import { LOGIN } from '../../graphql/mutations/auth';
 import { UPDATE_AUTHED_USER } from '../../graphql/state/authUser';
 
+// Components
+import { Form, Input, Label, Description, Group } from '../../components/shared/Form';
+import { Button } from '../../components/shared/Button';
 
 class Login extends Component {
   constructor(props) {
@@ -27,8 +31,11 @@ class Login extends Component {
     return (
       <ApolloConsumer>
         { client => (
-          <div>
-            <form onSubmit={(e) => {
+          <Wrapper>
+            <h1>Login</h1>
+            <Form
+              id="login"
+              onSubmit={(e) => {
                 e.preventDefault();
                 const { email, password } = this.state.inputs;
                 client.mutate({
@@ -48,16 +55,27 @@ class Login extends Component {
                 });
               }}
             >
-              <input type="text" name="email" value={this.state.inputs.email} onChange={this.handleChange} />
-              <input type="text" name="password" value={this.state.inputs.password} onChange={this.handleChange} />
-              <button type="submit">Login</button>
-            </form>
-          </div>
+              <Group>
+                <Input type="email" name="email" placeholder="Email" value={this.state.inputs.email} onChange={this.handleChange} />
+              </Group>
+              <Group>
+                <Input type="password" name="password" placeholder="Password" value={this.state.inputs.password} onChange={this.handleChange} />
+              </Group>
+            </Form>
+            <Button type="submit" form="login">Log in</Button>
+          </Wrapper>
         )}
       </ApolloConsumer>
     );
   }
 }
+
+const Wrapper = styled.div`
+  max-width: 590px;
+  padding: 50px;
+  background-color: #fff;
+  margin: 0 auto;
+`;
 
 Login.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,

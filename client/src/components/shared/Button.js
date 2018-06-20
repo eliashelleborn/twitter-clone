@@ -16,6 +16,7 @@ export const Button = styled.button`
   &:hover {
     background-color: ${props => (props.outlined ? '#eaf5fd' : '#006dbf')};
     border: 1px solid #006dbf;
+    cursor: pointer;
   }
   &:active {
     box-shadow: 0 0 0 2px #fff, 0 0 0 4px #1da1f2;
