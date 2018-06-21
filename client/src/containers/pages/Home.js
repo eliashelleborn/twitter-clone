@@ -7,6 +7,7 @@ import { GET_HOME_FEED } from '../../graphql/queries/feed';
 import Sidebar from '../../components/Sidebar';
 import ProfileModule from '../../components/Sidebar/modules/Profile';
 import TrendingModule from '../../components/Sidebar/modules/Trending';
+import ComposeTweet from '../../components/ComposeTweet/';
 import Feed from '../shared/Feed';
 
 class Home extends Component {
@@ -38,7 +39,7 @@ class Home extends Component {
 
         {/* MAIN CONTENT - Compose & Home Feed */}
         <main>
-          <div className="compose-tweet" />
+          <ComposeTweet />
           <div className="see-new-tweets" />
           <Feed query={GET_HOME_FEED} />
         </main>
@@ -60,10 +61,6 @@ const HomeLayout = styled.div`
     margin: 0 10px;
     @media screen and (max-width: 1190px) {
       margin: 0 0 0 10px;
-    }
-    .compose-tweet {
-      height: 58px;
-      background-color: #E8F4FB;
     }
     .see-new-tweets {
       height: 42px;
