@@ -5,15 +5,23 @@ export const CREATE_TWEET = gql`
     createTweet(text: $text) {
       _id
       text
-      user
+      createdAt
+      user {
+        username
+        screenName
+      }
+      entities {
+        hashtags
+        urls
+        userMentions
+      }
       stats {
         favoriteCount
-        retweetCount
         replyCount
+        retweetCount
       }
-      createdAt
     }
   }
 `;
 
-export const deleteTweet = gql``;
+export const deleteTweet = '';

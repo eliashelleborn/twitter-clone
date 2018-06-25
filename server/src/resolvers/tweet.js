@@ -12,8 +12,10 @@ const getHomeFeed = authRequired(async (parent, args, { models: { Tweet, Follow 
 
 // Mutations
 const createTweet = authRequired(async (parent, args, { models: { Tweet }, user }) => {
-  const hashtags = args.text.match(/#[a-z0-9_]+/g).map(x => x.substr(1));
-  const userMentions = args.text.match(/\B@[a-z0-9_-]+/gi).map(x => x.substr(1));
+  let hashtags = args.text.match(/#[a-z0-9_]+/g);
+  if (hashtags) hashtags = hashtags.map(x => x.substr(1));
+  let userMentions = args.text.match(/\B@[a-z0-9_-]+/gi);
+  if (userMentions) userMentions = userMentions.map(x => x.substr(1));
   const urls = args.text.match(/\bhttps?:\/\/\S+/gi);
 
   const newTweet = new Tweet({
