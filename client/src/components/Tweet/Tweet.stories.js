@@ -22,8 +22,7 @@ const Decorator = styled.div`
   @import 'https://use.fontawesome.com/releases/v5.0.13/css/all.css';
   width: 590px;
   margin: 0 auto;
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-  color: #14171a;
+  background-color: #fff;
 `;
 
 storiesOf('Tweet', module)

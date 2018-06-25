@@ -3,12 +3,12 @@ import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { ApolloConsumer } from 'react-apollo';
-import { LOGIN } from '../../graphql/mutations/auth';
-import { UPDATE_AUTHED_USER } from '../../graphql/state/authUser';
+import { LOGIN } from '../graphql/mutations/auth';
+import { UPDATE_AUTHED_USER } from '../graphql/state/authUser';
 
 // Components
-import { Form, Input, Group } from '../../components/shared/Form';
-import { Button } from '../../components/shared/Button';
+import { Form, Input, Group } from '../components/Form';
+import { Button } from '../components/Button';
 
 class Login extends Component {
   constructor(props) {
@@ -30,7 +30,7 @@ class Login extends Component {
     if (this.props.isAuthenticated) return <Redirect to="/" />;
     return (
       <ApolloConsumer>
-        { client => (
+        {client => (
           <Wrapper>
             <h1>Login</h1>
             <Form
@@ -42,17 +42,17 @@ class Login extends Component {
                   mutation: LOGIN,
                   variables: { email, password },
                 })
-                .then(({ data: { login: { user } } }) => {
-                  if (user) {
-                    client.mutate({
-                      mutation: UPDATE_AUTHED_USER,
-                      variables: { user },
-                    });
-                  }
-                })
-                .catch((err) => {
-                  console.log(err);
-                });
+                  .then(({ data: { login: { user } } }) => {
+                    if (user) {
+                      client.mutate({
+                        mutation: UPDATE_AUTHED_USER,
+                        variables: { user },
+                      });
+                    }
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
               }}
             >
               <Group>

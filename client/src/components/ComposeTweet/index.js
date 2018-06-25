@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Avatar from './Avatar';
 import { Input, InputWrapper, InputCount, InputImageIcon } from './Input';
 import { ActionBar, ActionsLeft, ActionsRight, Action } from './ActionBar';
-import { Button } from '../shared/Button';
+import { Button } from '../Button';
 
 class ComposeTweet extends Component {
   constructor(props) {
@@ -36,7 +36,6 @@ class ComposeTweet extends Component {
   render() {
     return (
       <StyledComposeTweet>
-
         <Avatar src="https://source.unsplash.com/random/100x100" />
 
         <InputWrapper>

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 // Components
-import { Container } from '../shared/Containers';
-import { ButtonLink, Button } from '../shared/Button';
+import { Container } from '../Containers';
+import { ButtonLink, Button } from '../Button';
 import Item from './Item';
 import Dropdown from './Dropdown';
 import Menu from './Menu';

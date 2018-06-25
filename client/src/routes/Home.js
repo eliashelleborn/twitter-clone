@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 /* import PropTypes from 'prop-types'; */
 import { Query } from 'react-apollo';
-import { GET_AUTHED_USER } from '../../graphql/state/authUser';
-import { GET_HOME_FEED } from '../../graphql/queries/feed';
-import Sidebar from '../../components/Sidebar';
-import ProfileModule from '../../components/Sidebar/modules/Profile';
-import TrendingModule from '../../components/Sidebar/modules/Trending';
-import ComposeTweet from '../../components/ComposeTweet/';
-import Feed from '../shared/Feed';
+import { GET_AUTHED_USER } from '../graphql/state/authUser';
+import { GET_HOME_FEED } from '../graphql/queries/feed';
+import Sidebar from '../components/Sidebar';
+import ProfileModule from '../components/Sidebar/modules/Profile';
+import TrendingModule from '../components/Sidebar/modules/Trending';
+import ComposeTweet from '../components/ComposeTweet/';
+import Feed from '../components/Feed';
 
 class Home extends Component {
   constructor(props) {

@@ -10,17 +10,17 @@ import './index.css';
 import { GET_AUTHED_USER, UPDATE_AUTHED_USER } from './graphql/state/authUser';
 import { AUTHENTICATE_WITH_TOKEN } from './graphql/mutations/auth';
 
-// Containers
-import Home from './containers/pages/Home';
-import Notifications from './containers/pages/Notifications';
-import Login from './containers/pages/Login';
-import Register from './containers/pages/Register';
+// Route Containers
+import Home from './routes/Home';
+import Notifications from './routes/Notifications';
+import Login from './routes/Login';
+import Register from './routes/Register';
 
 // Components
 import ProtectedRoute from './components/utils/ProtectedRoute';
 import Query from './components/utils/CustomQuery';
 import Navbar from './components/Navbar/';
-import { PageContainer } from './components/shared/Containers';
+import { PageContainer } from './components/Containers';
 
 
 class App extends Component {
