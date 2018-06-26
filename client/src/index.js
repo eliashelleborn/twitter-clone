@@ -1,26 +1,17 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-/* import PropTypes from 'prop-types'; */
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { ApolloProvider } from 'react-apollo';
 import client from './graphql/client';
 import './index.css';
 
-// Queries
 import { GET_AUTHED_USER, UPDATE_AUTHED_USER } from './graphql/state/authUser';
 import { AUTHENTICATE_WITH_TOKEN } from './graphql/mutations/auth';
-
-// Route Containers
-import Home from './routes/Home';
-import Notifications from './routes/Notifications';
-import Login from './routes/Login';
-import Register from './routes/Register';
-
-// Components
-import ProtectedRoute from './components/utils/ProtectedRoute';
 import Query from './components/utils/CustomQuery';
+
 import Navbar from './components/Navbar/';
 import { PageContainer } from './components/Containers';
+import Routes from './routes';
 
 
 class App extends Component {
@@ -43,8 +34,9 @@ class App extends Component {
       client.mutate({
         mutation: UPDATE_AUTHED_USER,
         variables: { user: data.me },
+      }).then(() => {
+        this.setState({ authIsLoading: false });
       });
-      this.setState({ authIsLoading: false });
     }).catch((err) => {
       this.setState({ authIsLoading: false });
     });
@@ -58,26 +50,12 @@ class App extends Component {
             <Query query={GET_AUTHED_USER}>
               {({ data: { authedUser } }) => (
                 <React.Fragment>
+
                   <Navbar user={authedUser} />
 
-                  {/* ===== ROUTES ===== */}
                   <PageContainer>
-                    <ProtectedRoute
-                      exact
-                      path="/"
-                      component={Home}
-                      isAuthenticated={!!authedUser}
-                    />
-                    <ProtectedRoute
-                      path="/notifications"
-                      component={Notifications}
-                      isAuthenticated={!!authedUser}
-                    />
-
-                    <Route path="/login" render={() => <Login isAuthenticated={!!authedUser} />} />
-                    <Route path="/register" component={Register} />
+                    <Routes authedUser={authedUser} />
                   </PageContainer>
-
 
                 </React.Fragment>
               )}
