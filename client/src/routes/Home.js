@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Query } from 'react-apollo';
 import { GET_AUTHED_USER } from '../graphql/state/authUser';
 import { GET_HOME_FEED } from '../graphql/queries/feed';
+import { PageContainer } from '../components/Containers';
 import Sidebar from '../components/Sidebar';
 import ProfileModule from '../components/Sidebar/modules/Profile';
 import TrendingModule from '../components/Sidebar/modules/Trending';
@@ -18,38 +19,40 @@ class Home extends Component {
   }
   render() {
     return (
-      <HomeLayout>
-        {/* LEFT SIDEBAR - Profile & Trending Modules */}
-        <Sidebar>
+      <PageContainer>
+        <HomeLayout>
+          {/* LEFT SIDEBAR - Profile & Trending Modules */}
+          <Sidebar>
 
-          <Query query={GET_AUTHED_USER}>
-            {({ data: { authedUser } }) => {
-              if (authedUser) {
-                return (
-                  <ProfileModule user={authedUser} />
-                );
-              }
-              return null;
-            }}
-          </Query>
+            <Query query={GET_AUTHED_USER}>
+              {({ data: { authedUser } }) => {
+                if (authedUser) {
+                  return (
+                    <ProfileModule user={authedUser} />
+                  );
+                }
+                return null;
+              }}
+            </Query>
 
-          <TrendingModule />
+            <TrendingModule />
 
-        </Sidebar>
+          </Sidebar>
 
-        {/* MAIN CONTENT - Compose & Home Feed */}
-        <main>
-          <ComposeTweet />
-          <div className="see-new-tweets" />
-          <Feed query={GET_HOME_FEED} />
-        </main>
+          {/* MAIN CONTENT - Compose & Home Feed */}
+          <main>
+            <ComposeTweet />
+            <div className="see-new-tweets" />
+            <Feed query={GET_HOME_FEED} />
+          </main>
 
-        {/* RIGHT SIDEBAR */}
-        <Sidebar>
-          Sidebar Right
-        </Sidebar>
+          {/* RIGHT SIDEBAR */}
+          <Sidebar>
+            Sidebar Right
+          </Sidebar>
 
-      </HomeLayout>
+        </HomeLayout>
+      </PageContainer>
     );
   }
 }

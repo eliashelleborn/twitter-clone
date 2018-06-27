@@ -43,6 +43,7 @@ const UserInfo = styled(NavLink)`
       font-weight: normal;
     }
     &:hover {
+      text-decoration: none;
       strong {
         text-decoration: underline;
         color: #1B95E0;

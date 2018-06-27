@@ -9,8 +9,7 @@ import Register from './Register';
 import Home from './Home';
 import Notifications from './Notifications';
 import Settings from './Settings';
-import AuthedUser from './AuthedUser';
-import User from './User';
+import User from './User/';
 
 const Routes = props => (
   <Switch>
@@ -19,9 +18,6 @@ const Routes = props => (
     <ProtectedRoute exact path="/" component={Home} isAuthenticated={!!props.authedUser} />
     <ProtectedRoute path="/notifications" component={Notifications} isAuthenticated={!!props.authedUser} />
     <ProtectedRoute path="/settings" component={Settings} isAuthenticated={!!props.authedUser} />
-    {props.authedUser &&
-      <Route path={`/${props.authedUser.username}`} component={AuthedUser} />
-    }
 
 
     {/* ===== PUBLIC ROUTES ===== */}

@@ -7,6 +7,7 @@ import { LOGIN } from '../graphql/mutations/auth';
 import { UPDATE_AUTHED_USER } from '../graphql/state/authUser';
 
 // Components
+import { PageContainer } from '../components/Containers';
 import { Form, Input, Group } from '../components/Form';
 import { Button } from '../components/Button';
 
@@ -29,43 +30,46 @@ class Login extends Component {
   render() {
     if (this.props.isAuthenticated) return <Redirect to="/" />;
     return (
-      <ApolloConsumer>
-        {client => (
-          <Wrapper>
-            <h1>Login</h1>
-            <Form
-              id="login"
-              onSubmit={(e) => {
-                e.preventDefault();
-                const { email, password } = this.state.inputs;
-                client.mutate({
-                  mutation: LOGIN,
-                  variables: { email, password },
-                })
-                  .then(({ data: { login: { user } } }) => {
-                    if (user) {
-                      client.mutate({
-                        mutation: UPDATE_AUTHED_USER,
-                        variables: { user },
-                      });
-                    }
+      <PageContainer>
+        <ApolloConsumer>
+          {client => (
+            <Wrapper>
+              <h1>Login</h1>
+              <Form
+                id="login"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const { email, password } = this.state.inputs;
+                  client.mutate({
+                    mutation: LOGIN,
+                    variables: { email, password },
                   })
-                  .catch((err) => {
-                    console.log(err);
-                  });
-              }}
-            >
-              <Group>
-                <Input type="email" name="email" placeholder="Email" value={this.state.inputs.email} onChange={this.handleChange} />
-              </Group>
-              <Group>
-                <Input type="password" name="password" placeholder="Password" value={this.state.inputs.password} onChange={this.handleChange} />
-              </Group>
-            </Form>
-            <Button type="submit" form="login">Log in</Button>
-          </Wrapper>
-        )}
-      </ApolloConsumer>
+                    .then(({ data: { login: { user } } }) => {
+                      if (user) {
+                        client.mutate({
+                          mutation: UPDATE_AUTHED_USER,
+                          variables: { user },
+                        });
+                      }
+                    })
+                    .catch((err) => {
+                      console.log(err);
+                    });
+                }}
+              >
+                <Group>
+                  <Input type="email" name="email" placeholder="Email" value={this.state.inputs.email} onChange={this.handleChange} />
+                </Group>
+                <Group>
+                  <Input type="password" name="password" placeholder="Password" value={this.state.inputs.password} onChange={this.handleChange} />
+                </Group>
+              </Form>
+              <Button type="submit" form="login">Log in</Button>
+            </Wrapper>
+          )}
+        </ApolloConsumer>
+      </PageContainer>
+
     );
   }
 }

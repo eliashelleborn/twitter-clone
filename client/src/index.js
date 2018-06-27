@@ -10,7 +10,6 @@ import { AUTHENTICATE_WITH_TOKEN } from './graphql/mutations/auth';
 import Query from './components/utils/CustomQuery';
 
 import Navbar from './components/Navbar/';
-import { PageContainer } from './components/Containers';
 import Routes from './routes';
 
 
@@ -53,9 +52,7 @@ class App extends Component {
 
                   <Navbar user={authedUser} />
 
-                  <PageContainer>
-                    <Routes authedUser={authedUser} />
-                  </PageContainer>
+                  <Routes authedUser={authedUser} />
 
                 </React.Fragment>
               )}

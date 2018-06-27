@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
+import { PageContainer } from '../components/Containers';
 
 class Notifications extends Component {
   constructor(props) {
@@ -11,9 +12,11 @@ class Notifications extends Component {
   }
   render() {
     return (
-      <div>
-        <p>Notifications</p>
-      </div>
+      <PageContainer>
+        <div>
+          <p>Notifications</p>
+        </div>
+      </PageContainer>
     );
   }
 }
