@@ -4,7 +4,7 @@ const authRequired = isAuthenticated.createResolver;
 
 // Queries
 const getUsers = authRequired((parent, args, { models }) => models.User.find());
-const getUserById = authRequired((parent, args, { models }) => models.User.findOne(args));
+const getUser = authRequired((parent, args, { models }) => models.User.findOne(args));
 
 // Mutations
 const updateUser = authRequired(async (parent, args, { models, user }) => {
@@ -20,7 +20,7 @@ const deleteUser = authRequired(async (parent, args, { models, user }) => {
 export default {
   Query: {
     getUsers,
-    getUserById,
+    getUser,
   },
   Mutation: {
     updateUser,

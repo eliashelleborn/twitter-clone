@@ -25,7 +25,7 @@ type UserStats {
 
 type Query {
   getUsers: [User!]
-  getUserById(_id: ID!): User
+  getUser(_id: ID, username: String): User
 }
 
 type Mutation {

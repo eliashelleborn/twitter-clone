@@ -8,6 +8,7 @@ import { Container } from '../../components/Containers';
 import Header from './components/Header';
 import Nav from './components/Nav';
 import Sidebar from '../../components/Sidebar/';
+import GetUser from './GetUser';
 
 class User extends Component {
   constructor(props) {
@@ -15,36 +16,42 @@ class User extends Component {
     this.state = {};
   }
   componentDidMount() {
-    console.log('User');
   }
   render() {
     return (
       <StyledUserPage>
-        <Header avatar="https://source.unsplash.com/random/400x400" />
-        <Nav />
-        {/* <Link to={`${this.props.match.url}`}>Tweets</Link>
-        <Link to={`${this.props.match.url}/followers`}>Followers</Link>
-        <Link to={`${this.props.match.url}/following`} >Following</Link>
-        <Link to={`${this.props.match.url}/likes`}>Likes</Link> */}
 
-        <Container id="content">
+        <GetUser userParam={this.props.match.params.user}>
+          {({ user, isAuthenticatedUser }) => (
+            <React.Fragment>
 
-          <Sidebar>
-            <p>Sidebar</p>
-          </Sidebar>
+              <Header avatar="https://source.unsplash.com/random/400x400" />
+              <Nav />
 
-          <main>
-            <Route exact path={`${this.props.match.url}`} render={() => <p>Tweets</p>} />
-            <Route path={`${this.props.match.url}/following`} render={() => <p>Following</p>} />
-            <Route path={`${this.props.match.url}/followers`} render={() => <p>Followers</p>} />
-            <Route path={`${this.props.match.url}/likes`} render={() => <p>Likes</p>} />
-          </main>
+              <Container id="content">
 
-          <Sidebar>
-            <p>Sidebar</p>
-          </Sidebar>
+                <Sidebar>
+                  <p>{user.username}</p>
+                </Sidebar>
 
-        </Container>
+                <main>
+                  <Route exact path={`${this.props.match.url}`} render={() => <p>Tweets</p>} />
+                  <Route path={`${this.props.match.url}/following`} render={() => <p>Following</p>} />
+                  <Route path={`${this.props.match.url}/followers`} render={() => <p>Followers</p>} />
+                  <Route path={`${this.props.match.url}/likes`} render={() => <p>Likes</p>} />
+                </main>
+
+                <Sidebar>
+                  {isAuthenticatedUser && <p>This is me.</p>}
+                  {!isAuthenticatedUser && <p>This is not me.</p>}
+                </Sidebar>
+
+              </Container>
+
+            </React.Fragment>
+          )}
+        </GetUser>
+
       </StyledUserPage>
     );
   }
@@ -53,6 +60,9 @@ class User extends Component {
 User.propTypes = {
   match: PropTypes.shape({
     url: PropTypes.string.isRequired,
+    params: PropTypes.shape({
+      user: PropTypes.string.isRequired,
+    }).isRequired,
   }).isRequired,
 };
 
