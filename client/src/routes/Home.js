@@ -4,8 +4,9 @@ import styled from 'styled-components';
 import { Query } from 'react-apollo';
 import { GET_AUTHED_USER } from '../graphql/state/authUser';
 import { GET_HOME_FEED } from '../graphql/queries/feed';
-import { PageContainer } from '../components/Containers';
-import Sidebar from '../components/Sidebar';
+import { PageContainer } from '../components/Layout/Containers';
+import Main from '../components/Layout/Main';
+import Side from '../components/Layout/Side';
 import ProfileModule from '../components/Sidebar/modules/Profile';
 import TrendingModule from '../components/Sidebar/modules/Trending';
 import ComposeTweet from '../components/ComposeTweet/';
@@ -19,59 +20,40 @@ class Home extends Component {
   }
   render() {
     return (
-      <PageContainer>
-        <HomeLayout>
-          {/* LEFT SIDEBAR - Profile & Trending Modules */}
-          <Sidebar>
+      <PageContainer flex >
+        {/* LEFT SIDEBAR - Profile & Trending Modules */}
+        <Side>
 
-            <Query query={GET_AUTHED_USER}>
-              {({ data: { authedUser } }) => {
-                if (authedUser) {
-                  return (
-                    <ProfileModule user={authedUser} />
-                  );
-                }
-                return null;
-              }}
-            </Query>
+          <Query query={GET_AUTHED_USER}>
+            {({ data: { authedUser } }) => {
+              if (authedUser) {
+                return (
+                  <ProfileModule user={authedUser} />
+                );
+              }
+              return null;
+            }}
+          </Query>
 
-            <TrendingModule />
+          <TrendingModule />
 
-          </Sidebar>
+        </Side>
 
-          {/* MAIN CONTENT - Compose & Home Feed */}
-          <main>
-            <ComposeTweet />
-            <div className="see-new-tweets" />
-            <Feed query={GET_HOME_FEED} />
-          </main>
+        {/* MAIN CONTENT - Compose & Home Feed */}
+        <Main>
+          <ComposeTweet />
+          <div className="see-new-tweets" />
+          <Feed query={GET_HOME_FEED} />
+        </Main>
 
-          {/* RIGHT SIDEBAR */}
-          <Sidebar>
-            Sidebar Right
-          </Sidebar>
-
-        </HomeLayout>
+        {/* RIGHT SIDEBAR */}
+        <Side>
+          Sidebar Right
+        </Side>
       </PageContainer>
     );
   }
 }
 
-const HomeLayout = styled.div`
-  display: flex;
-  main {
-    flex: 1;
-    margin: 0 10px;
-    @media screen and (max-width: 1190px) {
-      margin: 0 0 0 10px;
-    }
-    .see-new-tweets {
-      height: 42px;
-      background-color: #f5f8fa;
-      border-top: 1px solid #e6ecf0;
-      border-bottom: 1px solid #e6ecf0;
-    }
-  }
-`;
 
 export default Home;

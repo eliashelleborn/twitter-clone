@@ -5,6 +5,7 @@ export const Container = styled.div`
   margin: 0 auto;
   height: 100%;
   position: relative;
+  display: ${props => (props.flex ? 'flex' : 'block')};
 
   @media screen and (max-width: 1190px) {
     width: 890px;
@@ -20,6 +21,7 @@ export const PageContainer = styled.div`
   margin: 0 auto;
   padding-top: 56px;
   position: relative;
+  display: ${props => (props.flex ? 'flex' : 'block')};
 
   @media screen and (max-width: 1190px) {
     width: 890px;

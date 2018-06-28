@@ -7,7 +7,7 @@ import { LOGIN } from '../graphql/mutations/auth';
 import { UPDATE_AUTHED_USER } from '../graphql/state/authUser';
 
 // Components
-import { PageContainer } from '../components/Containers';
+import { PageContainer } from '../components/Layout/Containers';
 import { Form, Input, Group } from '../components/Form';
 import { Button } from '../components/Button';
 

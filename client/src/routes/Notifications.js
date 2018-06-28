@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
-import { PageContainer } from '../components/Containers';
+import { PageContainer } from '../components/Layout/Containers';
 
 class Notifications extends Component {
   constructor(props) {

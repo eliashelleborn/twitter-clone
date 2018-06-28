@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 // Components
-import { Container } from '../Containers';
+import { Container } from '../Layout/Containers';
 import { ButtonLink, Button } from '../Button';
 import Item from './Item';
 import Dropdown from './Dropdown';

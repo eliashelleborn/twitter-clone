@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Container } from '../../../components/Containers';
+import { Container } from '../../../components/Layout/Containers';
 
 const Header = props => (
   <StyledHeader>
