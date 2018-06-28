@@ -12,10 +12,11 @@ class Feed extends Component {
   render() {
     return (
       <Wrapper>
-        <Query query={this.props.query}>
-          {({ data: { getHomeFeed: tweets } }) => {
-            if (tweets) {
-              return tweets.map(tweet => <Tweet key={tweet._id} data={tweet} />);
+        <Query query={this.props.query} variables={this.props.variables}>
+          {({ data }) => {
+            const key = Object.keys(data)[0];
+            if (data[key]) {
+              return data[key].map(tweet => <Tweet key={tweet._id} data={tweet} />);
             }
             return null;
           }}
@@ -27,6 +28,11 @@ class Feed extends Component {
 
 Feed.propTypes = {
   query: PropTypes.shape({}).isRequired,
+  variables: PropTypes.shape({}),
+};
+
+Feed.defaultProps = {
+  variables: null,
 };
 
 const Wrapper = styled.div`

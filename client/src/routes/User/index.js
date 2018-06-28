@@ -40,7 +40,7 @@ class User extends Component {
                 <Route
                   exact
                   path={`${this.props.match.url}`}
-                  render={props => <Tweets {...props} isAuthenticatedUser={isAuthenticatedUser} />}
+                  render={props => <Tweets {...props} user={user} isAuthenticatedUser={isAuthenticatedUser} />}
                 />
                 <Route path={`${this.props.match.url}/following`} render={() => <p>Following</p>} />
                 <Route path={`${this.props.match.url}/followers`} render={() => <p>Followers</p>} />

@@ -7,7 +7,7 @@ import {
 } from './errors';
 
 
-const baseResolver = createResolver(
+export const baseResolver = createResolver(
   null,
   (parent, args, ctx, err) => {
     if (isInstance(err)) {

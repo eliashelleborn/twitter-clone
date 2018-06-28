@@ -24,5 +24,27 @@ export const GET_HOME_FEED = gql`
   }
 `;
 
-export const GET_USER_FEED = '';
+export const GET_USER_FEED = gql`
+  query getUserFeed($user: String!) {
+    getUserFeed(user: $user) {
+      _id
+      text
+      createdAt
+      user {
+        username
+        screenName
+      }
+      entities {
+        hashtags
+        urls
+        userMentions
+      }
+      stats {
+        favoriteCount
+        replyCount
+        retweetCount
+      }
+    }
+  }
+`;
 

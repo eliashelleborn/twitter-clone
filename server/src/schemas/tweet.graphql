@@ -22,6 +22,7 @@ type TweetStats {
 
 type Query {
   getHomeFeed: [Tweet]
+  getUserFeed(user: String!): [Tweet]
 }
 
 type Mutation {

@@ -1,6 +1,7 @@
-import { isAuthenticated } from '../utils/permissions';
+import { isAuthenticated, baseResolver } from '../utils/permissions';
 // import { UnauthorizedError, NotFoundError } from '../utils/errors';
 
+const resolver = baseResolver.createResolver;
 const authRequired = isAuthenticated.createResolver;
 
 // Queries
@@ -8,6 +9,11 @@ const getHomeFeed = authRequired(async (parent, args, { models: { Tweet, Follow 
   let usersFollowed = await Follow.find({ follower: user });
   usersFollowed = usersFollowed.map(x => x.followee);
   return Tweet.find({ user: { $in: [...usersFollowed, user] } }).populate('user').sort({ createdAt: -1 }).limit(25);
+});
+
+const getUserFeed = resolver(async (parent, args, { models: { Tweet } }) => {
+  const { user } = args;
+  return Tweet.find({ user }).populate('user').sort({ createdAt: -1 }).limit(25);
 });
 
 // Mutations
@@ -49,6 +55,7 @@ const deleteTweet = authRequired(async (parent, args, { models: { Tweet }, user 
 export default {
   Query: {
     getHomeFeed,
+    getUserFeed,
   },
   Mutation: {
     createTweet,
