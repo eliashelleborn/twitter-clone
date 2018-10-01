@@ -17,7 +17,7 @@ export const Container = styled.div`
 `;
 
 export const PageContainer = styled.div`
-  width: 1190px;
+  max-width: 1190px;
   margin: 0 auto;
   padding-top: 56px;
   position: relative;

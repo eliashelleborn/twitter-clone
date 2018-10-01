@@ -20,7 +20,7 @@ storiesOf('Form', module)
       </Group>
     </form>
   ))
-  .add('with label', () => (
+  .add('input with label', () => (
     <form>
       <Group>
         <Label>Label</Label>
@@ -28,7 +28,7 @@ storiesOf('Form', module)
       </Group>
     </form>
   ))
-  .add('with label and description', () => (
+  .add('input with label and description', () => (
     <form>
       <Group>
         <Label>Label</Label>

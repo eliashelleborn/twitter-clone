@@ -56,7 +56,7 @@ const Side = styled.div`
 
 const Main = styled.div`
   flex: 1;
+  min-width: 50%;
 `;
-
 
 export default Tweet;
