@@ -29,8 +29,8 @@ export const Input = styled.textarea`
 
 export const InputCount = styled.div.attrs({
   countcolor: (props) => {
-    if (props.textLength > 280) return '#e1245d';
-    else if (props.textLength >= 260 && props.textLength <= 280) return '#ffad1f';
+    if (props.textLength > props.maxChars) return '#e1245d';
+    else if (props.textLength >= props.maxChars - 20 && props.textLength <= props.maxChars) { return '#ffad1f'; }
     return '#aab8c2';
   },
 })`
@@ -40,7 +40,7 @@ export const InputCount = styled.div.attrs({
   right: 10px;
   bottom: 10px;
   span {
-    color: ${props => props.countcolor}
+    color: ${props => props.countcolor};
   }
 `;
 
@@ -48,7 +48,7 @@ export const InputImageIcon = styled.button`
   position: absolute;
   display: ${props => (props.expanded ? 'none' : 'block')};
   font-size: 18px;
-  color: #1B95E0;
+  color: #1b95e0;
   top: 9px;
   right: 15px;
   background: none;
@@ -57,4 +57,3 @@ export const InputImageIcon = styled.button`
   outline: 0;
   cursor: pointer;
 `;
-
