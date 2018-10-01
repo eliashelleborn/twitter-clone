@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Route, Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { Mutation } from 'react-apollo';
 
 // Routes
 import Tweets from './routes/Tweets';
@@ -18,40 +19,36 @@ class User extends Component {
     super(props);
     this.state = {};
   }
-  componentDidMount() {
-  }
+  componentDidMount() {}
   render() {
     return (
       <StyledUserPage>
-
         <GetUser userParam={this.props.match.params.user}>
           {({ user, isAuthenticatedUser }) => (
             <React.Fragment>
-
               <Header avatar="https://source.unsplash.com/random/400x400" />
-              <Nav />
+              <Nav user={user} isAuthenticatedUser={isAuthenticatedUser} />
 
-              <Container flex >
-
+              <Container flex>
                 <Side>
                   <p>{user.username}</p>
+                  <strong>{user.relation.followingMe ? 'Following You' : ''}</strong>
                 </Side>
 
                 <Route
                   exact
                   path={`${this.props.match.url}`}
-                  render={props => <Tweets {...props} user={user} isAuthenticatedUser={isAuthenticatedUser} />}
+                  render={routeProps => (
+                    <Tweets {...routeProps} user={user} isAuthenticatedUser={isAuthenticatedUser} />
+                  )}
                 />
                 <Route path={`${this.props.match.url}/following`} render={() => <p>Following</p>} />
                 <Route path={`${this.props.match.url}/followers`} render={() => <p>Followers</p>} />
                 <Route path={`${this.props.match.url}/likes`} render={() => <p>Likes</p>} />
-
               </Container>
-
             </React.Fragment>
           )}
         </GetUser>
-
       </StyledUserPage>
     );
   }

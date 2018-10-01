@@ -12,6 +12,10 @@ export const GET_USER = gql`
         followersCount
         followingCount
       }
+      relation {
+        following
+        followingMe
+      }
     }
   }
 `;
