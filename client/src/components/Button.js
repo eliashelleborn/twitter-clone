@@ -19,7 +19,14 @@ export const Button = styled.button`
   &:hover {
     background-color: ${props => (props.outlined ? '#eaf5fd' : '#006dbf')};
     border: 1px solid #006dbf;
+
+    ${props =>
+    props.hover && {
+      backgroundColor: props.hover.color,
+      border: `1px solid ${ props.hover.color}`,
+    }};
   }
+
   &:active {
     box-shadow: 0 0 0 2px #fff, 0 0 0 4px #1da1f2;
   }
@@ -31,4 +38,3 @@ export const ButtonLink = Button.withComponent(NavLink).extend`
     color: #fff;
   }
 `;
-
