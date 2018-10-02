@@ -7,6 +7,8 @@ export const GET_USER = gql`
       email
       username
       screenName
+      profileImage
+      profileBanner
       stats {
         tweetsCount
         followersCount

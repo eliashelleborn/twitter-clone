@@ -6,13 +6,12 @@ import Module from '../Module';
 
 const ProfileModule = ({ user }) => (
   <Wrapper>
-
-    <Banner />
+    <Banner img={user.profileBanner} />
 
     <UserInfo>
       <div>
         <NavLink to={user.username}>
-          <img src="https://source.unsplash.com/random/100x100" alt="" />
+          <img src={user.profileImage} alt="" />
         </NavLink>
       </div>
       <div className="user__names">
@@ -39,7 +38,6 @@ const ProfileModule = ({ user }) => (
         <span>{user.stats.followersCount}</span>
       </div>
     </Stats>
-
   </Wrapper>
 );
 
@@ -61,7 +59,7 @@ const Wrapper = Module.extend`
 
 const Banner = styled.div`
   height: 100px;
-  background-image: url('https://source.unsplash.com/random');
+  background-image: url(${props => props.img});
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -85,7 +83,7 @@ const UserInfo = styled.div`
   div:last-child {
     padding-left: 10px;
     padding-top: 10px;
-    a:first-child { 
+    a:first-child {
       span {
         font-size: 18px;
         font-weight: bold;
@@ -97,7 +95,8 @@ const UserInfo = styled.div`
       }
     }
     a:last-child {
-      &, span {
+      &,
+      span {
         line-height: 20px;
         font-size: 14px;
         font-weight: normal;
@@ -128,7 +127,7 @@ const Stats = styled.div`
     }
     span:last-child {
       display: block;
-      color: #1B95E0;
+      color: #1b95e0;
       font-size: 18px;
       font-weight: bold;
       padding-top: 3px;
@@ -137,4 +136,3 @@ const Stats = styled.div`
 `;
 
 export default ProfileModule;
-

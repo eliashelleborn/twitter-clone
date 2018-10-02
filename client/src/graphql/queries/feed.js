@@ -9,6 +9,7 @@ export const GET_HOME_FEED = gql`
       user {
         username
         screenName
+        profileImage
       }
       entities {
         hashtags
@@ -47,4 +48,3 @@ export const GET_USER_FEED = gql`
     }
   }
 `;
-

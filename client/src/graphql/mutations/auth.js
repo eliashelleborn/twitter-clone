@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const LOGIN = gql`
-  mutation login($email: String! $password: String!) {
-    login(email: $email password: $password) {
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
       accessToken
       refreshToken
       user {
@@ -10,6 +10,8 @@ export const LOGIN = gql`
         email
         username
         screenName
+        profileImage
+        profileBanner
         stats {
           tweetsCount
           followersCount
@@ -36,6 +38,8 @@ export const AUTHENTICATE_WITH_TOKEN = gql`
       email
       username
       screenName
+      profileImage
+      profileBanner
       stats {
         tweetsCount
         followersCount
@@ -44,4 +48,3 @@ export const AUTHENTICATE_WITH_TOKEN = gql`
     }
   }
 `;
-

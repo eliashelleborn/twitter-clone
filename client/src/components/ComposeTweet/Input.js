@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 export const InputWrapper = styled.div`
@@ -30,7 +29,9 @@ export const Input = styled.textarea`
 export const InputCount = styled.div.attrs({
   countcolor: (props) => {
     if (props.textLength > props.maxChars) return '#e1245d';
-    else if (props.textLength >= props.maxChars - 20 && props.textLength <= props.maxChars) { return '#ffad1f'; }
+    else if (props.textLength >= props.maxChars - 20 && props.textLength <= props.maxChars) {
+      return '#ffad1f';
+    }
     return '#aab8c2';
   },
 })`

@@ -6,9 +6,7 @@ import { GET_AUTHED_USER } from '../../graphql/state/authUser';
 import { GET_USER } from '../../graphql/queries/user';
 
 class GetUser extends Component {
-  componentDidMount() {
-
-  }
+  componentDidMount() {}
   render() {
     return (
       <Query query={GET_AUTHED_USER}>

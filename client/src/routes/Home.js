@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
-/* import PropTypes from 'prop-types'; */
+// import styled from 'styled-components';
+// import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 import { GET_AUTHED_USER } from '../graphql/state/authUser';
 import { GET_HOME_FEED } from '../graphql/queries/feed';
@@ -15,28 +15,23 @@ import Feed from '../components/Feed';
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {};
   }
   render() {
     return (
-      <PageContainer flex >
+      <PageContainer flex>
         {/* LEFT SIDEBAR - Profile & Trending Modules */}
         <Side>
-
           <Query query={GET_AUTHED_USER}>
             {({ data: { authedUser } }) => {
               if (authedUser) {
-                return (
-                  <ProfileModule user={authedUser} />
-                );
+                return <ProfileModule user={authedUser} />;
               }
               return null;
             }}
           </Query>
 
           <TrendingModule />
-
         </Side>
 
         {/* MAIN CONTENT - Compose & Home Feed */}
@@ -47,13 +42,10 @@ class Home extends Component {
         </Main>
 
         {/* RIGHT SIDEBAR */}
-        <Side>
-          Sidebar Right
-        </Side>
+        <Side>Sidebar Right</Side>
       </PageContainer>
     );
   }
 }
-
 
 export default Home;

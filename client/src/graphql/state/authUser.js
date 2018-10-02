@@ -13,6 +13,8 @@ export const GET_AUTHED_USER = gql`
       email
       username
       screenName
+      profileImage
+      profileBanner
       stats {
         tweetsCount
         followersCount
@@ -29,7 +31,6 @@ export const UPDATE_AUTHED_USER = gql`
   }
 `;
 
-
 // RESOLVERS
 const updateAuthedUser = (_, { user }, { cache }) => {
   const query = GET_AUTHED_USER;
@@ -37,7 +38,6 @@ const updateAuthedUser = (_, { user }, { cache }) => {
   cache.writeQuery({ query, data });
   return null;
 };
-
 
 const store = {
   defaults: authUserDefaults,

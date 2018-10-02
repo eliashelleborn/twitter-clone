@@ -53,7 +53,7 @@ const Nav = ({ isAuthenticatedUser, user }) => (
 );
 
 Nav.propTypes = {
-  isAuthenticatedUser: PropTypes.shape({}).isRequired,
+  isAuthenticatedUser: PropTypes.bool.isRequired,
   user: PropTypes.shape({}).isRequired,
 };
 

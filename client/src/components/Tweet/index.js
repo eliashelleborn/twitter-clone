@@ -17,7 +17,7 @@ class Tweet extends Component {
     return (
       <Wrapper>
         <Side>
-          <Avatar />
+          <Avatar img={data.user.profileImage} />
         </Side>
         <Main>
           <Header user={data.user} />

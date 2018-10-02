@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import styled from 'styled-components';
-import { Mutation } from 'react-apollo';
+// import { Mutation } from 'react-apollo';
 
 // Routes
 import Tweets from './routes/Tweets';
@@ -26,13 +26,15 @@ class User extends Component {
         <GetUser userParam={this.props.match.params.user}>
           {({ user, isAuthenticatedUser }) => (
             <React.Fragment>
-              <Header avatar="https://source.unsplash.com/random/400x400" />
+              <Header avatar={user.profileImage} banner={user.profileBanner} />
               <Nav user={user} isAuthenticatedUser={isAuthenticatedUser} />
 
               <Container flex>
                 <Side>
                   <p>{user.username}</p>
-                  <strong>{user.relation.followingMe ? 'Following You' : ''}</strong>
+                  {!isAuthenticatedUser && (
+                    <strong>{user.relation.followingMe ? 'Following You' : ''}</strong>
+                  )}
                 </Side>
 
                 <Route

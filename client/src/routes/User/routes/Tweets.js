@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { GET_USER_FEED } from '../../../graphql/queries/feed';
 import Side from '../../../components/Layout/Side';
@@ -17,7 +17,6 @@ const Tweets = props => (
     </Side>
   </React.Fragment>
 );
-
 
 Tweets.propTypes = {
   user: PropTypes.shape({

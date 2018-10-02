@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import ProtectedRoute from '../components/utils/ProtectedRoute';
 
 // Route Components
@@ -13,12 +13,14 @@ import User from './User/';
 
 const Routes = props => (
   <Switch>
-
     {/* ===== PROTECTED ROUTES ===== */}
     <ProtectedRoute exact path="/" component={Home} isAuthenticated={!!props.authedUser} />
-    <ProtectedRoute path="/notifications" component={Notifications} isAuthenticated={!!props.authedUser} />
+    <ProtectedRoute
+      path="/notifications"
+      component={Notifications}
+      isAuthenticated={!!props.authedUser}
+    />
     <ProtectedRoute path="/settings" component={Settings} isAuthenticated={!!props.authedUser} />
-
 
     {/* ===== PUBLIC ROUTES ===== */}
     <Route path="/login" render={() => <Login isAuthenticated={!!props.authedUser} />} />
@@ -29,7 +31,6 @@ const Routes = props => (
     <Route path="/:user" component={User} />
 
     <Route render={() => <p>404</p>} />
-
   </Switch>
 );
 

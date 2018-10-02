@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Avatar = styled.div`
-  background-image: url("https://source.unsplash.com/random/100x100");
+  background-image: url(${props => props.img});
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
