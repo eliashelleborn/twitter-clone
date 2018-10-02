@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Mutation } from 'react-apollo';
 
@@ -75,7 +75,7 @@ class ComposeTweet extends Component {
       <Mutation mutation={CREATE_TWEET}>
         {createTweet => (
           <StyledComposeTweet>
-            <Avatar src="https://source.unsplash.com/random/100x100" />
+            <Avatar src={this.props.avatar} />
 
             <InputWrapper>
               <InputImageIcon expanded={this.state.expanded}>
@@ -128,7 +128,9 @@ class ComposeTweet extends Component {
   }
 }
 
-ComposeTweet.propTypes = {};
+ComposeTweet.propTypes = {
+  avatar: PropTypes.string.isRequired,
+};
 
 const StyledComposeTweet = styled.div`
   position: relative;

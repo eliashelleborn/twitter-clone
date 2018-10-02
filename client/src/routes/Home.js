@@ -36,7 +36,9 @@ class Home extends Component {
 
         {/* MAIN CONTENT - Compose & Home Feed */}
         <Main>
-          <ComposeTweet />
+          <Query query={GET_AUTHED_USER}>
+            {({ data: { authedUser } }) => <ComposeTweet avatar={authedUser.profileImage} />}
+          </Query>
           <div className="see-new-tweets" />
           <Feed query={GET_HOME_FEED} />
         </Main>

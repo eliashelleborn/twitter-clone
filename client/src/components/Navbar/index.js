@@ -11,7 +11,6 @@ import Menu from './Menu';
 import Search from './Search';
 import UserButton from './UserButton';
 
-
 class Navbar extends Component {
   constructor(props) {
     super(props);
@@ -28,33 +27,29 @@ class Navbar extends Component {
   render() {
     return (
       <StyledNavbar>
-        {this.state.dropdownActive &&
-          <button id="click-mask" onClick={this.toggleDropdown} />
-        }
+        {this.state.dropdownActive && <button id="click-mask" onClick={this.toggleDropdown} />}
 
         <Container>
           <Item flex="1">
             <Menu isAuthenticated={!!this.props.user} />
           </Item>
 
-          {this.props.user && /* IF LOGGED IN */
+          {this.props.user /* IF LOGGED IN */ && (
             <React.Fragment>
               <Item marginright="14px">
                 <Search type="text" placeholder="Search Twitter" />
               </Item>
               <Item marginright="14px">
-                <UserButton onClick={this.toggleDropdown} />
-                {this.state.dropdownActive &&
-                  <Dropdown user={this.props.user} />
-                }
+                <UserButton img={this.props.user.profileImage} onClick={this.toggleDropdown} />
+                {this.state.dropdownActive && <Dropdown user={this.props.user} />}
               </Item>
               <Item>
                 <Button>Tweet</Button>
               </Item>
             </React.Fragment>
-          }
+          )}
 
-          {!this.props.user && /* IF NOT LOGGED IN */
+          {!this.props.user /* IF NOT LOGGED IN */ && (
             <React.Fragment>
               <Item marginright="5px">
                 <ButtonLink to="/login">Login</ButtonLink>
@@ -63,7 +58,7 @@ class Navbar extends Component {
                 <ButtonLink to="/register">Register</ButtonLink>
               </Item>
             </React.Fragment>
-          }
+          )}
         </Container>
       </StyledNavbar>
     );
@@ -73,6 +68,7 @@ class Navbar extends Component {
 Navbar.propTypes = {
   user: PropTypes.shape({
     username: PropTypes.string,
+    profileImage: PropTypes.string,
   }),
 };
 

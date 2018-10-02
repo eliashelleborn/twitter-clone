@@ -6,7 +6,7 @@ const User = styled.button`
   height: 32px;
   width: 32px;
   border-radius: 50%;
-  background-image: url('https://source.unsplash.com/random/100x100');
+  background-image: url(${props => props.img});
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
